@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define bit_count(n) 32 - __builtin_clz(n)
+#define bit_count(n) sizeof(n) * 8 - __builtin_clz(n)
 
 Float parse_float(const char *s) {
   Float f = 0;
@@ -20,7 +20,7 @@ Float parse_float(const char *s) {
     whole_num = -whole_num;
   }
   // parse whole num
-  int bc = sizeof(whole_num) * 8 - __builtin_clz(whole_num);
+  int bc = bit_count(whole_num);
 
   if ( bc > 0 && bc < MAN_WIDTH ) {
     // 1100 1100
